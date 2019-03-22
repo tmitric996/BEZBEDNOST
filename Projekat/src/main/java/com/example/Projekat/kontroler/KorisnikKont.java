@@ -11,7 +11,7 @@ import com.example.Projekat.model.Korisnik;
 import com.example.Projekat.repo.KorisnikRepo;
 
 @RestController
-@RequestMapping("/users") //valjda iz tabele vadi, a nazvala sam je korisnici u modelu
+@RequestMapping("/users") 
 public class KorisnikKont {
 	
 	@Autowired
@@ -23,6 +23,4 @@ public class KorisnikKont {
 		return rp.findAll();
 		
 	}
-	
-
 }
