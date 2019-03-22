@@ -16,16 +16,16 @@ public class Korisnik {
 	@Column(name="ID")
 	private Long id;
 	
-	@Column(name = "ime")
+	@Column(name = "ime", nullable = false)
 	private String ime;
 	
-	@Column(name = "prz")
+	@Column(name = "prz", nullable = false)
 	private String prz;
 	
-	@Column(name = "pass")
+	@Column(name = "pass", nullable = false)
 	private String pass;
 	
-	@Column(name = "email")
+	@Column(name = "email", nullable = false)
 	private String email;
 	
 	public Korisnik() {
