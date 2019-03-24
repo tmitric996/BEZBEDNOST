@@ -1,4 +1,4 @@
-package com.example.Project.model;
+package com.example.Projekat.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,18 +9,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="users")
-public class User {
+public class Korisnik {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="ID")
 	private Long id;
 	
-	@Column(name = "name", nullable = false)
-	private String name;
+	@Column(name = "ime", nullable = false)
+	private String ime;
 	
-	@Column(name = "lastName", nullable = false)
-	private String lastName;
+	@Column(name = "prz", nullable = false)
+	private String prz;
 	
 	@Column(name = "pass", nullable = false)
 	private String pass;
@@ -28,15 +28,15 @@ public class User {
 	@Column(name = "email", nullable = false)
 	private String email;
 	
-	public User() {
+	public Korisnik() {
 	
 	}
 	
 
-	public User(String name, String lastName, String pass, String email) {
+	public Korisnik(String ime, String prz, String pass, String email) {
 		super();
-		this.name = name;
-		this.lastName = lastName;
+		this.ime = ime;
+		this.prz = prz;
 		this.pass = pass;
 		this.email = email;
 	}
@@ -50,20 +50,20 @@ public class User {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getIme() {
+		return ime;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setIme(String ime) {
+		this.ime = ime;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getPrz() {
+		return prz;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setPrz(String prz) {
+		this.prz = prz;
 	}
 
 	public String getPass() {
