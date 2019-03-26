@@ -11,6 +11,7 @@ import com.example.Project.repository.UserRepo;
 
 @Service
 public interface UserDAO {
+	List<User> findAll();
 	User findById(Long id);
 	User saveUser(User user); 
 	void deleteUser(Long id);

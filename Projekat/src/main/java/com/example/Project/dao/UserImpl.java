@@ -1,5 +1,7 @@
 package com.example.Project.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,10 @@ public class UserImpl implements UserDAO {
 	
 	@Autowired
 	UserRepo rp;
+	
+	public List<User> findAll(){
+		return rp.findAll();
+	}
 	
 	/*sacuvaj korisnika*/
 	public User saveUser(User user){
@@ -25,6 +31,8 @@ public class UserImpl implements UserDAO {
 	public void deleteUser(Long id){
 		rp.deleteById(id);
 	}
+	
+	
 	
 	/*treba nadji po mail-u jos, proveriti*/
 	
