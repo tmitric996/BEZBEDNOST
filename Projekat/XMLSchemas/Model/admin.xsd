@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.megatravel.com/admin" xmlns:adm="http://www.megatravel.com/admin"
+    xmlns:ag="http://www.megatravel.com/agent" xmlns:tp="http://www.megatravel.com/dataTypes"
+    xmlns:us="http://www.megatravel.com/endUser">
+    <xs:import namespace="http://www.megatravel.com/dataTypes" schemaLocation="dataTypes.xsd"/>
+    <xs:import namespace="http://www.megatravel.com/endUser" schemaLocation="endUser.xsd"/>
+    <xs:import namespace="http://www.megatravel.com/agent" schemaLocation="agent.xsd"/>
+    <xs:element name="users">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="us:endUser"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="agents">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="ag:agent"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="additionalService">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:ID"/>
+                <xs:element name="serviceName" type="tp:nameType"/>
+                <xs:element name="serviceDescription" type="tp:descriptionType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="additionalServices">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="adm:additionalService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="accommodationType">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:ID"/>
+                <xs:element name="accommodationTypeName" type="tp:nameType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="accommodationTypes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="adm:accommodationType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

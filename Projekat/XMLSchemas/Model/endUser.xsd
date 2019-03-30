@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.megatravel.com/endUser" xmlns:us="http://www.megatravel.com/endUser"
+    xmlns:adm="http://www.megatravel.com/admin" xmlns:tp="http://www.megatravel.com/dataTypes"
+    xmlns:ag="http://www.megatravel.com/agent">
+    <xs:import namespace="http://www.megatravel.com/admin" schemaLocation="admin.xsd"/>
+    <xs:import namespace="http://www.megatravel.com/dataTypes" schemaLocation="dataTypes.xsd"/>
+    <xs:import namespace="http://www.megatravel.com/agent" schemaLocation="agent.xsd"/>
+    <xs:element name="endUser">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:ID"/>
+                <xs:element name="email" type="tp:emailType"/>
+                <xs:element name="password" type="tp:passwordType"/>
+                <xs:element minOccurs="1" name="firstName" type="tp:nameType"/>
+                <xs:element minOccurs="0" name="lastName" type="tp:nameType"/>
+                <xs:element name="country" type="tp:nameType" minOccurs="0"/>
+                <xs:element minOccurs="0" name="birthday" type="xs:date"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="phoneNumber"
+                    type="tp:phoneNumberType"/>
+                <xs:element name="active" type="xs:boolean"/>
+                <xs:element ref="us:reservations"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="reservation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:ID"/>
+                <xs:element name="arrivalDate" type="xs:date"/>
+                <xs:element name="departureDate" type="xs:date"/>
+                <xs:element name="bookedAccommodations">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" ref="ag:accommodationUnit"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="totalPrice" type="tp:moneyType"/>
+                <xs:element name="stayRealized" type="xs:boolean"/>
+                <xs:element name="endUserId" type="xs:IDREF"/>
+                <xs:element name="agentId" type="xs:IDREF"/>
+                <xs:element minOccurs="0" ref="us:chat"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="reservations">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="us:reservation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="chat">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:ID"/>
+                <xs:element name="chatHistory">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="us:message"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="message">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:ID"/>
+                <xs:element name="from" type="xs:IDREF"/>
+                <xs:element name="timeStamp" type="xs:dateTime"/>
+                <xs:element name="content" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

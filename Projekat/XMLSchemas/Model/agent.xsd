@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    targetNamespace="http://www.megatravel.com/agent" xmlns:ag="http://www.megatravel.com/agent"
+    xmlns:tp="http://www.megatravel.com/dataTypes" xmlns:adm="http://www.megatravel.com/admin"
+    xmlns:us="http://www.megatravel.com/endUser">
+    <xs:import namespace="http://www.megatravel.com/dataTypes" schemaLocation="dataTypes.xsd"/>
+    <xs:import namespace="http://www.megatravel.com/endUser" schemaLocation="endUser.xsd"/>
+    <xs:import namespace="http://www.megatravel.com/admin" schemaLocation="admin.xsd"/>
+    <xs:element name="agent">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:ID"/>
+                <xs:element name="email" type="tp:emailType"/>
+                <xs:element name="password" type="tp:passwordType"/>
+                <xs:element minOccurs="0" name="companyName" type="tp:nameType"/>
+                <xs:element name="firstName" type="tp:nameType"/>
+                <xs:element name="lastName" type="tp:nameType"/>
+                <xs:element name="PIB">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="1"/>
+                            <xs:maxLength value="50"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element ref="tp:location"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="phoneNumber"
+                    type="tp:phoneNumberType"/>
+                <xs:element name="approved" type="xs:boolean"/>
+                <xs:element name="ownedAccommodations">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0"
+                                ref="ag:accommodationUnit"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="us:reservations"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="accommodationUnit">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:ID"/>
+                <xs:element name="name" type="tp:nameType"/>
+                <xs:element name="capacity" type="xs:unsignedShort"/>
+                <xs:element ref="adm:accommodationType"/>
+                <xs:element name="description" type="tp:descriptionType"/>
+                <xs:element ref="tp:location"/>
+                <xs:element name="cancelationPeriod" type="xs:unsignedShort"/>
+                <xs:element name="pricePolicy">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="1" ref="ag:price"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="accumulatedRating" type="tp:ratingType"/>
+                <xs:element name="category">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="uncategorized"/>
+                            <xs:enumeration value="oneStar"/>
+                            <xs:enumeration value="twoStars"/>
+                            <xs:enumeration value="threeStars"/>
+                            <xs:enumeration value="fourStars"/>
+                            <xs:enumeration value="fiveStars"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="images">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" ref="ag:image"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ratings">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" ref="ag:rating"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="adm:additionalServices"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="image">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:ID"/>
+                <xs:element name="title" type="tp:nameType"/>
+                <xs:element name="description" type="tp:descriptionType"/>
+                <xs:choice>
+                    <xs:element name="URI" type="xs:anyURI"/>
+                    <xs:element name="data" type="xs:base64Binary"/>
+                </xs:choice>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="rating">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:ID"/>
+                <xs:element name="rated">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:unsignedShort">
+                            <xs:minInclusive value="0"/>
+                            <xs:maxInclusive value="5"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="date" type="xs:date"/>
+                <xs:element name="comment" type="xs:string"/>
+                <xs:element name="basedOnReservation" type="xs:IDREF"/>
+                <xs:element name="approved" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="price">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:ID"/>
+                <xs:element name="price" type="tp:moneyType"/>
+                <xs:element name="fromDate" type="xs:date"/>
+                <xs:element name="toDate" type="xs:date"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
