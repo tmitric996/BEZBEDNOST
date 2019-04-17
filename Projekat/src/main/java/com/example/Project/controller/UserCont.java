@@ -34,7 +34,7 @@ public class UserCont {
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> getUser(@PathVariable long id){
-		User user = dao.findById(id);
+		User user = dao.findOne(id);
 		
 		if(user == null){
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -60,7 +60,7 @@ public class UserCont {
 	public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO dto){
 		
 		User u = new User(dto);
-		u = dao.saveUser(u);
+		u = dao.save(u);
 		
 		return new ResponseEntity<UserDTO>(new UserDTO(u), HttpStatus.OK);
 			
@@ -69,8 +69,8 @@ public class UserCont {
 	@DeleteMapping(value = "/{id}")
 	public void delete(@PathVariable Long id){
 		
-		User u = dao.findById(id);
-		dao.deleteUser(id);
+		User u = dao.findOne(id);
+		dao.delete(u);
 		
 	}
 	

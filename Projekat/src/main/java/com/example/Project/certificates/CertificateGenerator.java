@@ -1,4 +1,4 @@
-package com.example.Project.Certificates;
+package com.example.Project.certificates;
 
 
 import java.math.BigInteger;

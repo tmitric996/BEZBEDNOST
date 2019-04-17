@@ -14,8 +14,8 @@ import com.example.Project.dto.UserDTO;
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", nullable = false, unique = true)
 	private Long id;
 	
 	@Column(name="username")

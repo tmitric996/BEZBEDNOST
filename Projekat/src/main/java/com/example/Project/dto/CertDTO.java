@@ -1,24 +1,17 @@
-package com.example.Project.model;
-
+package com.example.Project.dto;
 
 import java.security.PublicKey;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import org.bouncycastle.asn1.x500.X500Name;
 
+import com.example.Project.model.CertType;
+import com.example.Project.db.CertDB;
+import com.example.Project.model.Certificate;
 
-public class Certificate {
-
+public class CertDTO {
+	
 	private Long id;
-
-	private X500Name name;
 	
 	private String org; //naziv organizacije
 	
@@ -31,26 +24,7 @@ public class Certificate {
 	private boolean revoked;
 	private boolean permission;
 	
-	private PublicKey publicKey;
-	
 	private CertType type;
-
-	public Certificate() {
-		super();
-	}
-
-	public Certificate(Long id, String org, Long superior, Date issueDate, Date expDate, boolean root,
-			boolean revoked, boolean permission, CertType type) {
-		this.id = id;
-		this.org = org;
-		this.superior = superior;
-		this.issueDate = issueDate;
-		this.expDate = expDate;
-		this.root = root;
-		this.revoked = revoked;
-		this.permission = permission;
-		this.type = type;
-	}
 
 	public Long getId() {
 		return id;
@@ -58,14 +32,6 @@ public class Certificate {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public X500Name getName() {
-		return name;
-	}
-
-	public void setName(X500Name name) {
-		this.name = name;
 	}
 
 	public String getOrg() {
@@ -124,14 +90,6 @@ public class Certificate {
 		this.permission = permission;
 	}
 
-	public PublicKey getPublicKey() {
-		return publicKey;
-	}
-
-	public void setPublicKey(PublicKey publicKey) {
-		this.publicKey = publicKey;
-	}
-
 	public CertType getType() {
 		return type;
 	}
@@ -140,9 +98,29 @@ public class Certificate {
 		this.type = type;
 	}
 	
-	
-	
-	
+	public CertDTO(CertDB c) {
+		this.id = c.getId();
+		this.org = c.getOrg();
+		this.superior = c.getSuperior();
+		this.issueDate = c.getIssueDate();
+		this.expDate = c.getExpDate();
+		this.revoked = c.isRevoked();
+		this.root = c.isRoot();
+		this.permission = c.isPermission();
+		this.type = c.getType();
+	}
+
+	public CertDTO(Certificate c) {
+		this.id = c.getId();
+		this.org = c.getOrg();
+		this.superior = c.getSuperior();
+		this.issueDate = c.getIssueDate();
+		this.expDate = c.getExpDate();
+		this.revoked = c.isRevoked();
+		this.root = c.isRoot();
+		this.permission = c.isPermission();
+		this.type = c.getType();
+	}
 	
 	
 	
